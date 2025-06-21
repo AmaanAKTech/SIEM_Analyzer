@@ -1,7 +1,7 @@
 // src/App.jsx
 import React from 'react';
-import FileUploader from './components/FileUploader';
-import LogTable from './components/LogTable';
+import FileUploader from './components/FileUploader.jsx';
+import LogTable from './components/LogTable.jsx';
 
 export default function App() {
   return (
