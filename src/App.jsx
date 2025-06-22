@@ -7,6 +7,7 @@ import { AppContext } from './context/AppContext';
 import LogSearch from './components/LogSearch';
 import LogTable from './components/LogTable';
 import AlertPanel from './components/AlertPanel';
+import Dashboard from './components/Dashboard';
 
 export default function App() {
   const { parseFile } = useParser();
@@ -22,6 +23,7 @@ export default function App() {
     <div className="p-6 max-w-screen-xl mx-auto">
       <h1 className="text-3xl font-bold mb-4">SIEM Analyzer</h1>
       <input type="file" onChange={handleUpload} className="mb-4" />
+      <Dashboard />
       <AlertPanel />
       <LogSearch />
       <LogTable />
