@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
 export default function AlertPanel() {
-  const { alerts = [] } = useContext(AppContext); // fallback to []
+  const context = useContext(AppContext); // fallback to []
 
+  const alerts = context?.alerts ?? [];
   if (!alerts.length) return null;
 
   return (
