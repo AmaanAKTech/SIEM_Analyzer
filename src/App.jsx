@@ -23,6 +23,8 @@ export default function App() {
     <div className="p-6 max-w-screen-xl mx-auto">
       <h1 className="text-3xl font-bold mb-4">SIEM Analyzer</h1>
       <input type="file" onChange={handleUpload} className="mb-4" />
+      
+      {/* Updated component order */}
       <Dashboard />
       <AlertPanel />
       <LogSearch />
