@@ -18,7 +18,6 @@ export default function LogTable() {
   const { logs, searchQuery, filterLevel, filterIP } = useContext(AppContext);
 
   const filteredLogs = useMemo(() => {
-    // Apply basic filters first
     let result = logs.filter(log => {
       const levelMatch = filterLevel ? log.level === filterLevel : true;
       const ipMatch = filterIP ? log.ip.includes(filterIP) : true;
@@ -38,7 +37,9 @@ export default function LogTable() {
     return result;
   }, [logs, searchQuery, filterLevel, filterIP]);
 
-  if (filteredLogs.length === 0) {
+  const displayLogs = filteredLogs && filteredLogs.length ? filteredLogs : logs || [];
+
+  if (displayLogs.length === 0) {
     return <p className="text-gray-600 mt-4">No matching logs found.</p>;
   }
 
@@ -57,8 +58,8 @@ export default function LogTable() {
           </tr>
         </thead>
         <tbody>
-          {filteredLogs.map((log, idx) => (
-            <tr key={log.id} className={getRowClass(log.level)}>
+          {displayLogs.map?.((log, idx) => (
+            <tr key={log.id || idx} className={getRowClass(log.level)}>
               <td className="p-2 border-t">{idx + 1}</td>
               <td className="p-2 border-t">{log.timestamp}</td>
               <td className="p-2 border-t font-semibold">{log.level}</td>
