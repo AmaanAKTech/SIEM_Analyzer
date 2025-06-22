@@ -5,21 +5,20 @@ export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [logs, setLogs] = useState([]);
-  const [filterLevel, setFilterLevel] = useState('');
-  const [filterIP, setFilterIP] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [alerts, setAlerts] = useState([]);
+  const [filteredLogs, setFilteredLogs] = useState([]);
+  const [query, setQuery] = useState('');
 
-  const updateLogs = (logArray) => setLogs(logArray);
+  const value = {
+    logs,
+    setLogs,
+    filteredLogs,
+    setFilteredLogs,
+    query,
+    setQuery,
+  };
 
   return (
-    <AppContext.Provider value={{
-      logs, updateLogs,
-      filterLevel, setFilterLevel,
-      filterIP, setFilterIP,
-      searchQuery, setSearchQuery,
-       alerts, setAlerts 
-    }}>
+    <AppContext.Provider value={value}>
       {children}
     </AppContext.Provider>
   );
