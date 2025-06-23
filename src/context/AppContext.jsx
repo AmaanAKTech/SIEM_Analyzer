@@ -6,6 +6,7 @@ export const AppProvider = ({ children }) => {
   const [logs, setLogs] = useState([]);
   const [filteredLogs, setFilteredLogs] = useState([]); // important
   const [query, setQuery] = useState('');
+  const [alerts, setAlerts] = useState([]);
 
   const value = {
     logs,
@@ -14,6 +15,7 @@ export const AppProvider = ({ children }) => {
     setFilteredLogs,
     query,
     setQuery,
+    setAlerts
   };
 
   return (
