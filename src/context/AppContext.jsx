@@ -4,9 +4,14 @@ export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   const [logs, setLogs] = useState([]);
-  const [filteredLogs, setFilteredLogs] = useState([]); // important
+  const [filteredLogs, setFilteredLogs] = useState([]);
   const [query, setQuery] = useState('');
   const [alerts, setAlerts] = useState([]);
+
+  const updateLogs = (newLogs) => {
+    setLogs(newLogs);
+    setFilteredLogs(newLogs); 
+  };
 
   const value = {
     logs,
@@ -15,7 +20,9 @@ export const AppProvider = ({ children }) => {
     setFilteredLogs,
     query,
     setQuery,
-    setAlerts
+    alerts,
+    setAlerts,
+    updateLogs, 
   };
 
   return (

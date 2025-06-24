@@ -2,9 +2,8 @@ import React, { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
 export default function AlertPanel() {
-  const context = useContext(AppContext); // fallback to []
+  const { alerts = [] } = useContext(AppContext);
 
-  const alerts = context?.alerts ?? [];
   if (!alerts.length) return null;
 
   return (
@@ -12,7 +11,9 @@ export default function AlertPanel() {
       <h2 className="font-bold mb-2">Alerts</h2>
       <ul className="list-disc pl-5 space-y-1">
         {alerts.map((alert, idx) => (
-          <li key={idx}>{alert}</li>
+          <li key={idx}>
+            {alert.message || JSON.stringify(alert)}
+          </li>
         ))}
       </ul>
     </div>

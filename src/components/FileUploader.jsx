@@ -1,27 +1,11 @@
-import React, { useContext, useState } from 'react';
-import { AppContext } from '../context/AppContext';
-import useParser from '../hooks/useParser';
-
 export default function FileUploader() {
-  const { setLogs } = useContext(AppContext);
+  const { updateLogs } = useContext(AppContext); 
   const { parseFile } = useParser();
-  const [error, setError] = useState(null);
 
   const handleFile = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setError(null);
-      parseFile(
-        file,
-        (parsedArray) => {
-          setLogs(parsedArray);
-          console.log('Parsed entries:', parsedArray);
-        },
-        (err) => {
-          console.error('Parsing error:', err);
-          setError('Failed to read file');
-        }
-      );
+      parseFile(file); 
     }
   };
 
@@ -37,7 +21,6 @@ export default function FileUploader() {
       <label htmlFor="log-input" className="cursor-pointer text-blue-600">
         📁 Click or drag log file to upload
       </label>
-      {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
   );
 }

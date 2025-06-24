@@ -8,6 +8,7 @@ import LogSearch from './components/LogSearch';
 import LogTable from './components/LogTable';
 import AlertPanel from './components/AlertPanel';
 import Dashboard from './components/Dashboard';
+import FileUploader from './components/FileUploader'
 
 export default function App() {
   const { parseFile } = useParser();
@@ -25,6 +26,7 @@ export default function App() {
       <input type="file" onChange={handleUpload} className="mb-4" />
       
       {/* Updated component order */}
+      < FileUploader />
       <Dashboard />
       <AlertPanel />
       <LogSearch />
