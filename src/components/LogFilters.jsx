@@ -2,7 +2,19 @@ import { useContext } from 'react';
 import { AppContext } from '../context/AppContext';
 
 export default function LogFilters() {
-  const { filterLevel, setFilterLevel, filterIP, setFilterIP } = useContext(AppContext);
+  const context = useContext(AppContext);
+
+  if (!context) {
+    console.error("LogFilters: AppContext is undefined");
+    return null;
+  }
+
+  const {
+    filterLevel = '',
+    setFilterLevel = () => {},
+    filterIP = '',
+    setFilterIP = () => {}
+  } = context;
 
   return (
     <div className="flex gap-4 mb-4">

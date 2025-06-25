@@ -5,12 +5,16 @@ export const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [logs, setLogs] = useState([]);
   const [filteredLogs, setFilteredLogs] = useState([]);
-  const [query, setQuery] = useState('');
   const [alerts, setAlerts] = useState([]);
+
+  const [query, setQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filterLevel, setFilterLevel] = useState('');
+  const [filterIP, setFilterIP] = useState('');
 
   const updateLogs = (newLogs) => {
     setLogs(newLogs);
-    setFilteredLogs(newLogs); 
+    setFilteredLogs(newLogs);
   };
 
   const value = {
@@ -22,7 +26,15 @@ export const AppProvider = ({ children }) => {
     setQuery,
     alerts,
     setAlerts,
-    updateLogs, 
+    updateLogs,
+
+    // ✅ ADD THESE to support LogSearch and LogTable
+    searchQuery,
+    setSearchQuery,
+    filterLevel,
+    setFilterLevel,
+    filterIP,
+    setFilterIP,
   };
 
   return (

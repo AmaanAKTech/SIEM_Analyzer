@@ -1,36 +1,39 @@
 // src/App.jsx
-import React from 'react';
-import useParser from './hooks/useParser';
-import useDetectionEngine from './hooks/useDetectionEngine';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
+import useParser from './hooks/useParser.jsx';
+import useDetectionEngine from './hooks/useDetectionEngine.jsx';
 import { AppContext } from './context/AppContext';
-import LogSearch from './components/LogSearch';
-import LogTable from './components/LogTable';
-import AlertPanel from './components/AlertPanel';
-import Dashboard from './components/Dashboard';
-import FileUploader from './components/FileUploader'
+
+// ✅ Make sure these are correctly placed in /src/components/
+import FileUploader from './components/FileUploader.jsx';
+import Dashboard from './components/Dashboard.jsx';
+import AlertPanel from './components/AlertPanel.jsx';
+import LogSearch from './components/LogSearch.jsx';
+import LogTable from './components/LogTable.jsx';
 
 export default function App() {
   const { parseFile } = useParser();
   const { logs } = useContext(AppContext);
-  useDetectionEngine(logs); // Hook for rule detection
 
-  const handleUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) parseFile(file);
-  };
+  // ⛳ Starts detection logic after logs update
+  useDetectionEngine(logs);
 
   return (
-    <div className="p-6 max-w-screen-xl mx-auto">
+    <div className="p-6 max-w-screen-xl mx-auto text-white">
       <h1 className="text-3xl font-bold mb-4">SIEM Analyzer</h1>
-      <input type="file" onChange={handleUpload} className="mb-4" />
-      
-      {/* Updated component order */}
-      < FileUploader />
-      <Dashboard />
-      <AlertPanel />
-      <LogSearch />
-      <LogTable />
+
+      {/* Main Flow */}
+      <FileUploader />
+
+      {/* Render conditionally based on logs */}
+      {logs?.length > 0 && (
+        <>
+          <Dashboard />
+          <AlertPanel />
+          <LogSearch />
+          <LogTable />
+        </>
+      )}
     </div>
   );
 }
