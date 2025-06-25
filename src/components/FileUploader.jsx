@@ -15,14 +15,14 @@ export default function FileUploader() {
   };
 
   return (
-    <div className=" p-6 rounded-lg text-center">
-      <input
-        type="file"
-        className="hidden"
-        id="log-input"
-        accept=".log,.txt,.cef,.leef"
-        onChange={handleFile}
-      />
+    <div className="upload-box">
+      <input 
+      type="file" 
+      id="log-input" 
+      className="hidden" 
+      accept=".log,.txt,.cef,.leef"
+      onChange={handleFile} />
+     
       <label htmlFor="log-input" className="cursor-pointer text-blue-600 ">
         📁 Click or drag a file to upload
       </label>
