@@ -1,32 +1,28 @@
 // src/App.jsx
+import "./App.css"
 import React, { useContext } from 'react';
-import useParser from './hooks/useParser.jsx';
-import useDetectionEngine from './hooks/useDetectionEngine.jsx';
-import { AppContext } from './context/AppContext';
+import { AppProvider, AppContext } from './context/AppContext';
 
-// ✅ Make sure these are correctly placed in /src/components/
-import FileUploader from './components/FileUploader.jsx';
-import Dashboard from './components/Dashboard.jsx';
-import AlertPanel from './components/AlertPanel.jsx';
-import LogSearch from './components/LogSearch.jsx';
-import LogTable from './components/LogTable.jsx';
+import FileUploader from './components/FileUploader';
+import Dashboard from './components/Dashboard';
+import AlertPanel from './components/AlertPanel';
+import LogSearch from './components/LogSearch';
+import LogTable from './components/LogTable';
+import useDetectionEngine from './hooks/useDetectionEngine';
 
-export default function App() {
-  const { parseFile } = useParser();
-  const { logs } = useContext(AppContext);
+function AppContent() {
+  const context = useContext(AppContext);             // ✅ Safe
+  const logs = context?.logs || [];                   // ✅ No crash
+  const updateLogs = context?.updateLogs;
 
-  // ⛳ Starts detection logic after logs update
-  useDetectionEngine(logs);
+  useDetectionEngine(logs);                           // ✅ Safe to run
 
   return (
     <div className="p-6 max-w-screen-xl mx-auto text-white">
       <h1 className="text-3xl font-bold mb-4">SIEM Analyzer</h1>
-
-      {/* Main Flow */}
       <FileUploader />
 
-      {/* Render conditionally based on logs */}
-      {logs?.length > 0 && (
+      {logs.length > 0 && (
         <>
           <Dashboard />
           <AlertPanel />
@@ -35,5 +31,13 @@ export default function App() {
         </>
       )}
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <AppProvider>
+      <AppContent />
+    </AppProvider>
   );
 }

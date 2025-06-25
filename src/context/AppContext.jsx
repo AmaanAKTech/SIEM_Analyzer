@@ -1,3 +1,4 @@
+// src/context/AppContext.jsx
 import React, { createContext, useState } from 'react';
 
 export const AppContext = createContext();
@@ -27,8 +28,6 @@ export const AppProvider = ({ children }) => {
     alerts,
     setAlerts,
     updateLogs,
-
-    // ✅ ADD THESE to support LogSearch and LogTable
     searchQuery,
     setSearchQuery,
     filterLevel,
@@ -43,3 +42,4 @@ export const AppProvider = ({ children }) => {
     </AppContext.Provider>
   );
 };
+
