@@ -9,3 +9,21 @@ module.exports = {
   },
   plugins: [],
 }
+// tailwind.config.js
+module.exports = {
+  // ...
+  theme: {
+    extend: {
+      keyframes: {
+        slideUp: {
+          '0%': { transform: 'translateY(30px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+      },
+      animation: {
+        slideUp: 'slideUp 0.4s ease-out forwards',
+      },
+    },
+  },
+  plugins: [require('tailwind-scrollbar')],
+};
