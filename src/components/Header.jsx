@@ -17,10 +17,20 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
-        {/* Title */}
-        <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
-          🔏 SIEM Analyzer
-        </h1>
+        {/* Title + Mobile Button (with gap) */}
+        <div className="flex items-center gap-[80px]">
+          <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
+            🔏 SIEM Analyzer
+          </h1>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            className="md:hidden text-gray-700"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
 
         {/* Desktop Menu */}
         <nav className="hidden md:flex items-center gap-x-6">
@@ -31,14 +41,6 @@ export default function Header() {
             Dashboard
           </Link>
         </nav>
-
-        {/* Mobile Menu Toggle */}
-        <button
-          className="md:hidden text-gray-700"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
       </div>
 
       {/* Mobile Dropdown */}
